@@ -1,4 +1,4 @@
-export class AppError extends Error {
+class AppError extends Error {
     constructor(message, statusCode = 500, details = null) {
         super(message);
         this.statusCode = statusCode;
@@ -6,20 +6,27 @@ export class AppError extends Error {
     }
 }
 
-export class NotFoundError extends AppError {
+class NotFoundError extends AppError {
     constructor(message = 'Not Found') {
         super(message, 404);
     }
 }
 
-export class ValidationError extends AppError {
+class ValidationError extends AppError {
     constructor(message = 'Invalid input') {
         super(message, 400);
     }
 }
 
-export class DatabaseError extends AppError {
+class DatabaseError extends AppError {
     constructor(err) {
-        super('Database operation failed', 500, err?.message);
+        super('Database operation failed', 500, err.message);
     }
 }
+
+module.exports = {
+    AppError,
+    NotFoundError,
+    ValidationError,
+    DatabaseError,
+};

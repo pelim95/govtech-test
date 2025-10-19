@@ -4,7 +4,7 @@ const operationRoutes = require('./routes/operationRoutes');
 const {AppError} = require("./util/appError");
 const logger = require("./util/logger");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 

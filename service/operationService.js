@@ -8,7 +8,6 @@ const logger = require('../util/logger');
 const database = databaseService();
 
 async function registerStudents(data) {
-    let studentMail;
     try{
         const { error, value } = registerStudentsDto.validate(data);
         if (error) throw new ValidationError(error.message);
@@ -22,7 +21,6 @@ async function registerStudents(data) {
         }
 
         for (const studentEmail of students) {
-            studentMail = studentEmail;
             let studentRecord = await database.getStudentByEmail(studentEmail);
             if (!studentRecord) {
                 studentRecord = await database.createStudent({
@@ -33,10 +31,6 @@ async function registerStudents(data) {
                 logger.info(`Created new student: ${studentEmail}`);
             }
 
-            logger.info('Available methods on teacherRecord:');
-            logger.info(Object.getOwnPropertyNames(Object.getPrototypeOf(teacherRecord))
-                .filter(name => name.includes('Student')));
-
             await teacherRecord.addStudents(studentRecord, {
                 through: { id: uuidv4() }
             });
@@ -45,14 +39,6 @@ async function registerStudents(data) {
 
         logger.info(`Successfully registered ${students.length} students for ${teacher}`);
     } catch (error) {
-        console.error('========== ERROR DETAILS ==========');
-        console.error('Student email:', studentMail);
-        console.error('Error name:', error.name);
-        console.error('Error message:', error.message);
-        console.error('SQL:', error.sql);
-        console.error('Parent error:', error.parent);
-        console.error('Original error:', error.original);
-
         if (error instanceof AppError) {
             throw error;
         }
@@ -124,9 +110,13 @@ async function notifyStudents(data){
 
         const activeStudents = teacherRecord.Students.filter(student => student.status !== 'SUSPENDED');
 
+        const studentRecords = await database.getStudentByEmails(emails);
+        if (!studentRecords) throw new NotFoundError('No student records found');
+        const activeMentionedStudents = studentRecords.filter(student => student.status !== 'SUSPENDED');
+
         const allEmails = [
             ...activeStudents.map(s => s.email),
-            ...emails,
+            ...activeMentionedStudents.map(s => s.email),
         ];
 
         logger.info(`Successfully retrieved list of students notification.`);

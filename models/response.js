@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 function getRegisteredStudents(students = []) {
     return { students: students };
 }
