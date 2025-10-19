@@ -87,7 +87,7 @@ Then run below commands:
 docker build -t govtech-test .
 
 # Run container
-docker run -p 3000:3000 --env-file .env govtech-test
+docker run -p 3000:3000 govtech-test
 ```
 
 ## Accessing the Application on Cloud
