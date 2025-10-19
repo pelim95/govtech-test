@@ -3,15 +3,24 @@ const createDbService = require('./service/dbService');
 const operationRoutes = require('./routes/operationRoutes');
 const {AppError} = require("./util/appError");
 const logger = require("./util/logger");
-
 const app = express();
 const port = 3000;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
 
 app.use(express.json());
 
 //! Initialize database
 const database = createDbService();
 database.init().then().catch(console.error);
+
+//! Health check
+app.get('/', (request, response) => {
+    response.send('API is running');
+});
+
+//! Serve Swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //! Register routes
 app.use('/api', operationRoutes);
@@ -26,12 +35,6 @@ app.use((err, req, res, next) => {
 
     logger.error(`Unhandled exception: ${err.message}`, err);
     res.status(500).json({ error: 'Internal Server Error' });
-});
-
-
-//! Health check
-app.get('/', (request, response) => {
-    response.send('API is running');
 });
 
 app.listen(port, () => logger.info(`Server running at ${port}`));

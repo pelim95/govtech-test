@@ -16,6 +16,9 @@
     "joi": "^18.0.1",
     "mysql2": "^3.15.2",
     "sequelize": "^6.37.7",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "uuid": "^13.0.0",
     "winston": "^3.18.3"
   },

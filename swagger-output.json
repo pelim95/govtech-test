@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GovTech Test API",
+    "description": "API for managing teachers and students",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacher": {
+                  "example": "teacherken@gmail.com"
+                },
+                "students": {
+                  "example": ["studentjon@gmail.com", "studenthon@gmail.com"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/commonstudents": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "teacher",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "students": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "students": ["commonstudent1@gmail.com", "commonstudent2@gmail.com"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/suspend": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "student": {
+                  "type": "string",
+                  "example": "studentmary@gmail.com"
+                }
+              },
+              "required": ["student"]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/retrievefornotifications": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacher": {
+                  "type": "string",
+                  "example": "teacherken@gmail.com"
+                },
+                "notification": {
+                  "type": "string",
+                  "example": "Hello students! @studentagnes@gmail.com @studentmiche@gmail.com"
+                }
+              },
+              "required": ["teacher", "notification"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
