@@ -1,5 +1,5 @@
-const { describe, test, expect, beforeEach } = require('@jest/globals');
-const { ValidationError, AppError, NotFoundError } = require('../../util/appError');
+const {describe, test, expect, beforeEach} = require('@jest/globals');
+const {ValidationError, AppError, NotFoundError} = require('../../util/appError');
 
 const teachersData = require('../fixtures/teachers.json');
 const studentsData = require('../fixtures/students.json');
@@ -32,8 +32,8 @@ jest.mock('uuid', () => ({
 
 const databaseService = require('../../service/dbService');
 const logger = require('../../util/logger');
-const { v4: uuidv4 } = require('uuid');
-const { registerStudents, getCommonStudents, suspendStudent, notifyStudents } = require('../../service/operationService');
+const {v4: uuidv4} = require('uuid');
+const {registerStudents, getCommonStudents, suspendStudent, notifyStudents} = require('../../service/operationService');
 
 describe('registerStudents', () => {
     const mockDatabase = databaseService();
@@ -51,7 +51,7 @@ describe('registerStudents', () => {
 
         mockDatabase.getTeacherByEmail.mockResolvedValue(mockTeacher);
         mockDatabase.getStudentByEmail.mockResolvedValue(null);
-        mockDatabase.createStudent.mockResolvedValue({ id: 'student-123', email: 'student1@example.com' });
+        mockDatabase.createStudent.mockResolvedValue({id: 'student-123', email: 'student1@example.com'});
 
         // Act
         await registerStudents(scenarios.registerStudents.validRequest);
@@ -75,7 +75,7 @@ describe('registerStudents', () => {
 
         mockDatabase.getTeacherByEmail.mockResolvedValue(null);
         mockDatabase.createTeacher.mockResolvedValue(mockTeacher);
-        mockDatabase.createStudent.mockResolvedValue({ id: 'student-123', email: 'student1@example.com' });
+        mockDatabase.createStudent.mockResolvedValue({id: 'student-123', email: 'student1@example.com'});
 
         const requestData = {
             teacher: teachersData.newTeacher.email,
@@ -174,7 +174,7 @@ describe('getCommonStudents', () => {
         const result = await getCommonStudents([teachersData.teacherWithNoStudents.email]);
 
         // Assert
-        expect(result).toEqual({ students: [] });
+        expect(result).toEqual({students: []});
     });
 });
 
@@ -199,7 +199,7 @@ describe('suspendStudent', () => {
         );
         expect(mockDatabase.updateStudent).toHaveBeenCalledWith(
             studentsData.normalStudent.id,
-            { status: 'SUSPENDED' }
+            {status: 'SUSPENDED'}
         );
     });
 
@@ -414,7 +414,7 @@ describe('notifyStudents', () => {
             teachersData.teacherWithActiveStudents
         );
         mockDatabase.getStudentByEmails.mockResolvedValue([
-            { id: 'student-1', email: 'active1@example.com', status: 'NORMAL' }
+            {id: 'student-1', email: 'active1@example.com', status: 'NORMAL'}
         ]);
 
         const data = {

@@ -11,12 +11,12 @@ async function registerStudentsReq(request, response, next) {
 
 async function getCommonStudentsReq(request, response, next) {
     try {
-        const teacherEmails= Array.isArray(request.query.teacher)
+        const teacherEmails = Array.isArray(request.query.teacher)
             ? request.query.teacher
             : [request.query.teacher];
 
         if (!teacherEmails[0]) {
-            return response.status(400).json({ error: 'At least one teacher email is required.' });
+            return response.status(400).json({error: 'At least one teacher email is required.'});
         }
 
         const result = await getCommonStudents(teacherEmails);
@@ -44,4 +44,4 @@ async function notifyStudentsReq(request, response, next) {
     }
 }
 
-module.exports = { registerStudentsReq, getCommonStudentsReq, suspendStudentReq, notifyStudentsReq };
+module.exports = {registerStudentsReq, getCommonStudentsReq, suspendStudentReq, notifyStudentsReq};

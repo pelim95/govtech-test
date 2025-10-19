@@ -16,9 +16,16 @@
     }
   },
   "getCommonStudents": {
-    "singleTeacher": ["teacher1@example.com"],
-    "multipleTeachers": ["teacher1@example.com", "teacher2@example.com"],
-    "nonExistentTeacher": ["nonexistent@example.com"]
+    "singleTeacher": [
+      "teacher1@example.com"
+    ],
+    "multipleTeachers": [
+      "teacher1@example.com",
+      "teacher2@example.com"
+    ],
+    "nonExistentTeacher": [
+      "nonexistent@example.com"
+    ]
   },
   "suspendStudent": {
     "validRequest": {

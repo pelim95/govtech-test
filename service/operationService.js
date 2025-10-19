@@ -1,22 +1,22 @@
-const { AppError, NotFoundError, ValidationError } = require('../util/appError');
+const {AppError, NotFoundError, ValidationError} = require('../util/appError');
 const databaseService = require('./dbService');
-const { registerStudentsDto, suspendStudentDto, notifyStudentsDto } = require('../models/request');
-const { v4: uuidv4 } = require('uuid');
-const { getRegisteredStudents, getMentionedStudents } = require('../models/response')
+const {registerStudentsDto, suspendStudentDto, notifyStudentsDto} = require('../models/request');
+const {v4: uuidv4} = require('uuid');
+const {getRegisteredStudents, getMentionedStudents} = require('../models/response')
 const logger = require('../util/logger');
 
 const database = databaseService();
 
 async function registerStudents(data) {
-    try{
-        const { error, value } = registerStudentsDto.validate(data);
+    try {
+        const {error, value} = registerStudentsDto.validate(data);
         if (error) throw new ValidationError(error.message);
 
-        const { teacher, students } = value;
+        const {teacher, students} = value;
 
         let teacherRecord = await database.getTeacherByEmail(teacher);
         if (!teacherRecord) {
-            teacherRecord = await database.createTeacher({ id: uuidv4(), email: teacher });
+            teacherRecord = await database.createTeacher({id: uuidv4(), email: teacher});
             logger.info(`Created new teacher: ${teacher}`);
         }
 
@@ -32,7 +32,7 @@ async function registerStudents(data) {
             }
 
             await teacherRecord.addStudents(studentRecord, {
-                through: { id: uuidv4() }
+                through: {id: uuidv4()}
             });
             logger.info(`Linked student ${studentEmail} to teacher ${teacher}`);
         }
@@ -42,13 +42,13 @@ async function registerStudents(data) {
         if (error instanceof AppError) {
             throw error;
         }
-        logger.error('Unexpected error on student registration.', { message: error.message, stack: error.stack });
+        logger.error('Unexpected error on student registration.', {message: error.message, stack: error.stack});
         throw new AppError('Failed to register students.', 500, error.message);
     }
 }
 
 async function getCommonStudents(teacherList) {
-    try{
+    try {
         const teacherRecords = await database.getTeacherByEmails(teacherList);
         if (!teacherRecords.length) throw new NotFoundError('No teachers found');
 
@@ -65,21 +65,21 @@ async function getCommonStudents(teacherList) {
         });
 
         return getRegisteredStudents(commonStudents);
-    }catch (error) {
+    } catch (error) {
         if (error instanceof AppError) {
             throw error;
         }
-        logger.error('Unexpected error on student retrieval.', { message: error.message, stack: error.stack });
+        logger.error('Unexpected error on student retrieval.', {message: error.message, stack: error.stack});
         throw new AppError('Failed to retrieve students.', 500, error.message);
     }
 }
 
 async function suspendStudent(data) {
-    try{
-        const { error, value } = suspendStudentDto.validate(data);
+    try {
+        const {error, value} = suspendStudentDto.validate(data);
         if (error) throw new ValidationError(error.message);
 
-        const { student } = value;
+        const {student} = value;
 
         let studentRecord = await database.getStudentByEmail(student);
         if (!studentRecord) throw new NotFoundError('No student records found');
@@ -91,17 +91,17 @@ async function suspendStudent(data) {
         if (error instanceof AppError) {
             throw error;
         }
-        logger.error('Unexpected error on student suspension.', { message: error.message, stack: error.stack });
+        logger.error('Unexpected error on student suspension.', {message: error.message, stack: error.stack});
         throw new AppError('Failed to suspend student.', 500, error.message);
     }
 }
 
-async function notifyStudents(data){
-    try{
-        const { error, value } = notifyStudentsDto.validate(data);
+async function notifyStudents(data) {
+    try {
+        const {error, value} = notifyStudentsDto.validate(data);
         if (error) throw new ValidationError(error.message);
 
-        const { teacher, notification } = value;
+        const {teacher, notification} = value;
 
         const emails = extractMentionedEmails(notification);
 
@@ -126,7 +126,10 @@ async function notifyStudents(data){
         if (error instanceof AppError) {
             throw error;
         }
-        logger.error('Unexpected error on student notification retrieval.', { message: error.message, stack: error.stack });
+        logger.error('Unexpected error on student notification retrieval.', {
+            message: error.message,
+            stack: error.stack
+        });
         throw new AppError('Failed to retrieve notify students.', 500, error.message);
     }
 }
@@ -138,4 +141,4 @@ function extractMentionedEmails(text) {
         .map(word => word.slice(1).trim());
 }
 
-module.exports = { registerStudents, getCommonStudents, suspendStudent, notifyStudents };
+module.exports = {registerStudents, getCommonStudents, suspendStudent, notifyStudents};

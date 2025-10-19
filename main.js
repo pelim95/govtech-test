@@ -30,11 +30,11 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     if (err instanceof AppError) {
         logger.error(`${err.message} (status: ${err.statusCode})`);
-        return res.status(err.statusCode).json({ error: err.message });
+        return res.status(err.statusCode).json({message: err.message});
     }
 
     logger.error(`Unhandled exception: ${err.message}`, err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({message: 'Internal Server Error'});
 });
 
 app.listen(port, () => logger.info(`Server running at ${port}`));

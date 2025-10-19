@@ -16,4 +16,4 @@ const notifyStudentsDto = Joi.object({
     notification: Joi.string().required()
 })
 
-module.exports = { registerStudentsDto, suspendStudentDto, notifyStudentsDto };
+module.exports = {registerStudentsDto, suspendStudentDto, notifyStudentsDto};

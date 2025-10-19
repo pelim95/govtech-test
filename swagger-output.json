@@ -35,7 +35,10 @@
                   "example": "teacherken@gmail.com"
                 },
                 "students": {
-                  "example": ["studentjon@gmail.com", "studenthon@gmail.com"]
+                  "example": [
+                    "studentjon@gmail.com",
+                    "studenthon@gmail.com"
+                  ]
                 }
               }
             }
@@ -72,7 +75,10 @@
                 }
               },
               "example": {
-                "students": ["commonstudent1@gmail.com", "commonstudent2@gmail.com"]
+                "students": [
+                  "commonstudent1@gmail.com",
+                  "commonstudent2@gmail.com"
+                ]
               }
             }
           }
@@ -95,7 +101,9 @@
                   "example": "studentmary@gmail.com"
                 }
               },
-              "required": ["student"]
+              "required": [
+                "student"
+              ]
             }
           }
         ],
@@ -126,7 +134,10 @@
                   "example": "Hello students! @studentagnes@gmail.com @studentmiche@gmail.com"
                 }
               },
-              "required": ["teacher", "notification"]
+              "required": [
+                "teacher",
+                "notification"
+              ]
             }
           }
         ],

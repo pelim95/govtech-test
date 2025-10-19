@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 function getRegisteredStudents(students = []) {
-    return { students: students };
+    return {students: students};
 }
 
 function getMentionedStudents(students = []) {
@@ -11,4 +11,4 @@ function getMentionedStudents(students = []) {
     };
 }
 
-module.exports = { getRegisteredStudents, getMentionedStudents };
+module.exports = {getRegisteredStudents, getMentionedStudents};

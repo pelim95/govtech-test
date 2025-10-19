@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { Sequelize, DataTypes } = require('sequelize');
+const {Sequelize, DataTypes} = require('sequelize');
 require('dotenv').config();
 
 let bufferObj = Buffer.from(process.env.DB_PASSWORD, "base64");

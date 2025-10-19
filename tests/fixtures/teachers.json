@@ -10,16 +10,24 @@
     "id": "teacher-1",
     "email": "teacher1@example.com",
     "Students": [
-      { "email": "student1@example.com" },
-      { "email": "student2@example.com" }
+      {
+        "email": "student1@example.com"
+      },
+      {
+        "email": "student2@example.com"
+      }
     ]
   },
   "teacherWithStudents2": {
     "id": "teacher-2",
     "email": "teacher2@example.com",
     "Students": [
-      { "email": "student2@example.com" },
-      { "email": "student3@example.com" }
+      {
+        "email": "student2@example.com"
+      },
+      {
+        "email": "student3@example.com"
+      }
     ]
   },
   "teacherWithNoStudents": {
@@ -31,17 +39,32 @@
     "id": "teacher-1",
     "email": "teacher@example.com",
     "Students": [
-      { "email": "active1@example.com", "status": "NORMAL" },
-      { "email": "active2@example.com", "status": "NORMAL" },
-      { "email": "suspended1@example.com", "status": "SUSPENDED" }
+      {
+        "email": "active1@example.com",
+        "status": "NORMAL"
+      },
+      {
+        "email": "active2@example.com",
+        "status": "NORMAL"
+      },
+      {
+        "email": "suspended1@example.com",
+        "status": "SUSPENDED"
+      }
     ]
   },
   "teacherWithNoActiveStudents": {
     "id": "teacher-2",
     "email": "teacher2@example.com",
     "Students": [
-      { "email": "suspended1@example.com", "status": "SUSPENDED" },
-      { "email": "suspended2@example.com", "status": "SUSPENDED" }
+      {
+        "email": "suspended1@example.com",
+        "status": "SUSPENDED"
+      },
+      {
+        "email": "suspended2@example.com",
+        "status": "SUSPENDED"
+      }
     ]
   }
 }

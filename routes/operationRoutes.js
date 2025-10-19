@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {registerStudentsReq, getCommonStudentsReq, suspendStudentReq, notifyStudentsReq} = require('../controller/operationController');
+const {
+    registerStudentsReq,
+    getCommonStudentsReq,
+    suspendStudentReq,
+    notifyStudentsReq
+} = require('../controller/operationController');
 
 router.post('/register', registerStudentsReq);
 router.get('/commonstudents', getCommonStudentsReq);

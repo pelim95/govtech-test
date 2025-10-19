@@ -4,7 +4,7 @@ const {DatabaseError} = require("../util/appError");
 const {Op} = require("sequelize");
 
 function databaseService() {
-    const { sequelize, Students, Teachers } = database;
+    const {sequelize, Students, Teachers} = database;
 
     async function init() {
         try {
@@ -21,11 +21,11 @@ function databaseService() {
         init,
 
         async getAllStudents() {
-            return await Students.findAll({ include: Teachers });
+            return await Students.findAll({include: Teachers});
         },
 
         async getStudentByEmail(email) {
-            return await Students.findOne({ where: { email }, include: Teachers });
+            return await Students.findOne({where: {email}, include: Teachers});
         },
 
         async createStudent(data) {
@@ -33,29 +33,29 @@ function databaseService() {
         },
 
         async updateStudent(id, data) {
-            const [updated] = await Students.update(data, { where: { id } });
-            return { updated };
+            const [updated] = await Students.update(data, {where: {id}});
+            return {updated};
         },
 
-        async getStudentByEmails(emails){
-            return await Students.findAll({ where: { email: { [Op.in]: emails } }, include: Teachers });
+        async getStudentByEmails(emails) {
+            return await Students.findAll({where: {email: {[Op.in]: emails}}, include: Teachers});
         },
 
         async deleteStudent(id) {
-            const deleted = await Students.destroy({ where: { id } });
-            return { deleted };
+            const deleted = await Students.destroy({where: {id}});
+            return {deleted};
         },
 
         async getAllTeachers() {
-            return await Teachers.findAll({ include: Students });
+            return await Teachers.findAll({include: Students});
         },
 
         async getTeacherByEmail(email) {
-            return await Teachers.findOne({ where: { email } , include: Students });
+            return await Teachers.findOne({where: {email}, include: Students});
         },
 
-        async getTeacherByEmails(emails){
-            return await Teachers.findAll({ where: { email: { [Op.in]: emails } }, include: Students });
+        async getTeacherByEmails(emails) {
+            return await Teachers.findAll({where: {email: {[Op.in]: emails}}, include: Students});
         },
 
         async createTeacher(data) {
@@ -63,13 +63,13 @@ function databaseService() {
         },
 
         async updateTeacher(id, data) {
-            const [updated] = await Teachers.update(data, { where: { id } });
-            return { updated };
+            const [updated] = await Teachers.update(data, {where: {id}});
+            return {updated};
         },
 
         async deleteTeacher(id) {
-            const deleted = await Teachers.destroy({ where: { id } });
-            return { deleted };
+            const deleted = await Teachers.destroy({where: {id}});
+            return {deleted};
         }
     };
 }
