@@ -1,0 +1,31 @@
+{
+  "normalStudent": {
+    "id": "student-123",
+    "email": "student@example.com",
+    "status": "NORMAL",
+    "teacherId": "teacher-123"
+  },
+  "suspendedStudent": {
+    "id": "student-456",
+    "email": "suspended@example.com",
+    "status": "SUSPENDED",
+    "teacherId": "teacher-123"
+  },
+  "studentList": [
+    "student1@example.com",
+    "student2@example.com",
+    "student3@example.com"
+  ],
+  "mentionedStudents": [
+    { "id": "student-1", "email": "student1@example.com", "status": "NORMAL" },
+    { "id": "student-2", "email": "student2@example.com", "status": "NORMAL" }
+  ],
+  "mixedStatusStudents": [
+    { "id": "student-1", "email": "student1@example.com", "status": "NORMAL" },
+    { "id": "student-2", "email": "suspended@example.com", "status": "SUSPENDED" }
+  ],
+  "allSuspendedStudents": [
+    { "id": "student-1", "email": "suspended1@example.com", "status": "SUSPENDED" },
+    { "id": "student-2", "email": "suspended2@example.com", "status": "SUSPENDED" }
+  ]
+}

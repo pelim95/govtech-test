@@ -1,0 +1,52 @@
+{
+  "registerStudents": {
+    "validRequest": {
+      "teacher": "teacher@example.com",
+      "students": [
+        "student1@example.com",
+        "student2@example.com"
+      ]
+    },
+    "invalidRequest": {
+      "teacher": "invalid"
+    },
+    "missingField": {
+      "teacher": "teacher@example.com",
+      "students": []
+    }
+  },
+  "getCommonStudents": {
+    "singleTeacher": ["teacher1@example.com"],
+    "multipleTeachers": ["teacher1@example.com", "teacher2@example.com"],
+    "nonExistentTeacher": ["nonexistent@example.com"]
+  },
+  "suspendStudent": {
+    "validRequest": {
+      "student": "student@example.com"
+    },
+    "invalidRequest": {
+      "email": "student@example.com"
+    },
+    "missingField": {}
+  },
+  "notifyStudent": {
+    "validNotification": {
+      "teacher": "teacher@example.com",
+      "notification": "Hello students! @student1@example.com @student2@example.com"
+    },
+    "notificationWithNoMentions": {
+      "teacher": "teacher@example.com",
+      "notification": "Hello everyone, no mentions here"
+    },
+    "notificationWithSuspendedMention": {
+      "teacher": "teacher@example.com",
+      "notification": "Hello @suspended@example.com"
+    },
+    "invalidNotification": {
+      "teacher": "teacher@example.com"
+    },
+    "missingTeacher": {
+      "notification": "Hello @student1@example.com"
+    }
+  }
+}

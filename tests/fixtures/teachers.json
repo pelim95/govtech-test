@@ -1,0 +1,47 @@
+{
+  "existingTeacher": {
+    "id": "teacher-123",
+    "email": "teacher1@example.com"
+  },
+  "newTeacher": {
+    "email": "newteacher@example.com"
+  },
+  "teacherWithStudents": {
+    "id": "teacher-1",
+    "email": "teacher1@example.com",
+    "Students": [
+      { "email": "student1@example.com" },
+      { "email": "student2@example.com" }
+    ]
+  },
+  "teacherWithStudents2": {
+    "id": "teacher-2",
+    "email": "teacher2@example.com",
+    "Students": [
+      { "email": "student2@example.com" },
+      { "email": "student3@example.com" }
+    ]
+  },
+  "teacherWithNoStudents": {
+    "id": "teacher-3",
+    "email": "teacher3@example.com",
+    "Students": []
+  },
+  "teacherWithActiveStudents": {
+    "id": "teacher-1",
+    "email": "teacher@example.com",
+    "Students": [
+      { "email": "active1@example.com", "status": "NORMAL" },
+      { "email": "active2@example.com", "status": "NORMAL" },
+      { "email": "suspended1@example.com", "status": "SUSPENDED" }
+    ]
+  },
+  "teacherWithNoActiveStudents": {
+    "id": "teacher-2",
+    "email": "teacher2@example.com",
+    "Students": [
+      { "email": "suspended1@example.com", "status": "SUSPENDED" },
+      { "email": "suspended2@example.com", "status": "SUSPENDED" }
+    ]
+  }
+}
